@@ -1,0 +1,14 @@
+# Ignorar archivos innecesarios para Docker
+.git/
+.gitignore
+README.md
+docs/
+src/
+pom.xml
+mvnw*
+.mvn/
+
+# Mantener solo lo necesario:
+# - target/monitoreo-kafka-0.0.1-SNAPSHOT.jar
+# - Wallet/
+# - Dockerfile
