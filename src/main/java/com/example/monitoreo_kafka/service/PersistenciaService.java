@@ -23,8 +23,8 @@ import java.time.LocalDateTime;
 @Service
 public class PersistenciaService {
     
-    @Value("${app.modo.simulacion:true}")
-    private boolean modoSimulacion;
+    @Value("${app.simulacion.enabled:false}")
+    private boolean simulacionEnabled;
     
     @Autowired(required = false)
     private UbicacionRepository ubicacionRepository;
@@ -37,7 +37,7 @@ public class PersistenciaService {
      */
     @Transactional
     public void guardarUbicacion(UbicacionVehiculo ubicacion) {
-        if (modoSimulacion) {
+        if (simulacionEnabled) {
             simularInsertUbicacion(ubicacion);
         } else {
             insertarUbicacionReal(ubicacion);
@@ -49,7 +49,7 @@ public class PersistenciaService {
      */
     @Transactional
     public void guardarHorario(HorarioVehiculo horario) {
-        if (modoSimulacion) {
+        if (simulacionEnabled) {
             simularInsertHorario(horario);
         } else {
             insertarHorarioReal(horario);

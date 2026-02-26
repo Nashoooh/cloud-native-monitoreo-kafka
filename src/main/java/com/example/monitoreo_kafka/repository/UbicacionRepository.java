@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository para operaciones CRUD de ubicaciones
@@ -42,4 +43,24 @@ public interface UbicacionRepository extends JpaRepository<UbicacionEntity, Long
         @Param("vehiculoId") String vehiculoId,
         @Param("fecha") LocalDate fecha
     );
+    
+    // Nuevos métodos para estadísticas y dashboard
+    @Query("SELECT DISTINCT u.vehiculoId FROM UbicacionEntity u ORDER BY u.vehiculoId")
+    List<String> findDistinctVehiculoIds();
+    
+    @Query("SELECT DISTINCT u.ciudad FROM UbicacionEntity u WHERE u.ciudad IS NOT NULL ORDER BY u.ciudad")
+    List<String> findDistinctCiudades();
+    
+    Optional<UbicacionEntity> findTopByOrderByFechaRegistroDesc();
+    
+    // Consultas por fechas
+    long countByFechaRegistroBetween(LocalDateTime inicio, LocalDateTime fin);
+    
+    @Query("SELECT DISTINCT u.vehiculoId FROM UbicacionEntity u WHERE u.fechaRegistro BETWEEN :inicio AND :fin ORDER BY u.vehiculoId")
+    List<String> findDistinctVehiculoIdsByFechaRegistroBetween(@Param("inicio") LocalDateTime inicio, @Param("fin") LocalDateTime fin);
+    
+    // Ubicaciones por vehículo y tiempo real
+    List<UbicacionEntity> findByVehiculoIdAndFechaRegistroGreaterThanEqualOrderByFechaRegistroDesc(String vehiculoId, LocalDateTime fecha);
+    
+    List<UbicacionEntity> findByFechaRegistroGreaterThanEqualOrderByFechaRegistroDesc(LocalDateTime fecha);
 }

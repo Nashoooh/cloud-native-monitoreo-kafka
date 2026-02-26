@@ -27,8 +27,8 @@ import java.util.stream.Collectors;
 @Service
 public class ResumenDiarioService {
     
-    @Value("${app.modo.simulacion:true}")
-    private boolean modoSimulacion;
+    @Value("${app.simulacion.enabled:false}")
+    private boolean simulacionEnabled;
     
     @Autowired(required = false)
     private UbicacionRepository ubicacionRepository;
@@ -60,7 +60,7 @@ public class ResumenDiarioService {
         log.info("📅 Fecha: {}", fecha);
         log.info("═══════════════════════════════════════════════════════════");
         
-        if (modoSimulacion) {
+        if (simulacionEnabled) {
             generarResumenSimulado(fecha);
         } else {
             generarResumenReal(fecha);
@@ -187,9 +187,9 @@ public class ResumenDiarioService {
             .vehiculoId(vehiculoId)
             .placaVehiculo(ubicaciones.get(0).getPlacaVehiculo())
             .fechaResumen(fecha)
-            .totalUbicaciones(ubicaciones.size())
+            .totalUbicaciones((long) ubicaciones.size())
             .ciudadesVisitadas(String.join(", ", ciudades))
-            .totalParadas(horarios.size())
+            .totalParadas((long) horarios.size())
             .horaInicio(ubicaciones.get(0).getTimestampUbicacion())
             .horaFin(ubicaciones.get(ubicaciones.size() - 1).getTimestampUbicacion())
             .velocidadPromedio(Math.round(velocidadPromedio * 100.0) / 100.0)

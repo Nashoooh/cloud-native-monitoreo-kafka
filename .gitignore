@@ -31,14 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Mantener documentación pero no archivos generados
 database/schema_with_sequences.sql
+
+# Wallet de Oracle (contiene información sensible)
+Wallet/
+Wallet
 database/schema.sql
 docs/CONFIGURACION_ORACLE_CLOUD.md
 docs/EJEMPLOS_MENSAJES.md
 docs/ESPECIFICACION_MICROSERVICIOS.md
 docs/ESPECIFICACION_MS_MONITORIZACION.md
 docs/INICIO_RAPIDO.md
+docs/README_MONITORIZACION_COMPLETO.md
 docs/README_MONITORIZACION.md
-
-
-Wallet

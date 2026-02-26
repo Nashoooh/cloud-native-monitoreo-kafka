@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -34,4 +35,7 @@ public interface HorarioRepository extends JpaRepository<HorarioEntity, Long> {
         @Param("vehiculoId") String vehiculoId,
         @Param("fecha") LocalDate fecha
     );
+    
+    // Método para estadísticas por rango de fechas
+    long countByFechaRegistroBetween(LocalDateTime inicio, LocalDateTime fin);
 }

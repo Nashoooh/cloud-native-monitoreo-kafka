@@ -37,13 +37,13 @@ public class ResumenDiarioEntity {
     private LocalDate fechaResumen;
     
     @Column(name = "TOTAL_UBICACIONES", nullable = false)
-    private Integer totalUbicaciones;
+    private Long totalUbicaciones;
     
     @Column(name = "CIUDADES_VISITADAS", length = 500)
     private String ciudadesVisitadas;
     
     @Column(name = "TOTAL_PARADAS", nullable = false)
-    private Integer totalParadas;
+    private Long totalParadas;
     
     @Column(name = "HORA_INICIO")
     private LocalDateTime horaInicio;

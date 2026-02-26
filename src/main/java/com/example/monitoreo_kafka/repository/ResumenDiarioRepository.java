@@ -19,7 +19,7 @@ public interface ResumenDiarioRepository extends JpaRepository<ResumenDiarioEnti
     /**
      * Busca un resumen por vehículo y fecha
      */
-    Optional<ResumenDiarioEntity> findByVehiculoIdAndFechaResumen(
+    List<ResumenDiarioEntity> findByVehiculoIdAndFechaResumen(
         String vehiculoId,
         LocalDate fechaResumen
     );
@@ -27,7 +27,17 @@ public interface ResumenDiarioRepository extends JpaRepository<ResumenDiarioEnti
     /**
      * Obtiene todos los resúmenes de una fecha
      */
-    List<ResumenDiarioEntity> findByFechaResumen(LocalDate fechaResumen);
+    List<ResumenDiarioEntity> findByFechaResumenOrderByVehiculoId(LocalDate fechaResumen);
+    
+    /**
+     * Obtiene todos los resúmenes de un vehículo ordenados por fecha
+     */
+    List<ResumenDiarioEntity> findByVehiculoIdOrderByFechaResumenDesc(String vehiculoId);
+    
+    /**
+     * Obtiene resúmenes desde una fecha específica
+     */
+    List<ResumenDiarioEntity> findByFechaResumenGreaterThanEqualOrderByFechaResumenDesc(LocalDate fecha);
     
     /**
      * Obtiene los últimos N resúmenes
